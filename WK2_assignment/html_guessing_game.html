@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+    <title>JavaScript Guessing Game</title>
+</head>
+<body onload="do_game()">
+<script>
+            var target;
+            var guess_input;
+            var finished = false;
+            var guesses = 0;
+            var colors = ["cyan", "gold", "gray", "green" ,"magenta" , "orange", "red", "white", "yellow", "blue"];
+
+            function do_game() {
+                colors.sort()
+                var random_number = Math.random() * 10;
+                var target_index = Math.floor(random_number);
+                target = colors[target_index];
+                alert(target);
+                console.log(target);
+
+                while (!finished) {
+                    guess_input = prompt("I am thinking of one of these colors: \n\n" + 
+                        colors.join(', ') + 
+                        "\n\nWhat color am I thinking of?");
+                    guesses += 1;
+                    finished = check_guess();
+                }
+            }
+
+            function check_guess() {
+                error_alert_msg_1 = "Sorry, your guess is not correct!\n\nHint: your color is alphabetically "
+                error_alert_msg_2 = " than mine.\n\nPlease try again."
+                if (colors.indexOf(guess_input) == -1) {
+                    alert("Sorry, I don't recognize your color.\n\nPlease try again.");
+                    return false;
+                }
+                if ((guess_input > target)) {
+                    alert(error_alert_msg_1 + "HIGHER" + error_alert_msg_2);
+                    return false;
+                }
+                if (guess_input < target) {
+                    alert(error_alert_msg_1 + "LOWER" + error_alert_msg_2);
+                    return false;
+                }
+                alert("Congratulations! You have guessed the color!\n\n" + 
+                    "It took you " + guesses + " guesses to finish the game!\n\n" + 
+                    "You can see the color in the background.");
+                myBody = document.getElementsByTagName("body")[0];
+                myBody.style.background = guess_input;
+                return true;
+            }
+</script>
+</body>
+</html>
