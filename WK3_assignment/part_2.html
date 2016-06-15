@@ -20,12 +20,10 @@
     <script>
         // the script section must be at the bottom
         // http://stackoverflow.com/questions/8670530/javascript-error-cannot-call-method-appendchild-of-null
-        var numberOfFaces = 5;
-        var theLeftSide = document.getElementById("leftSide");
-        var theRightSide = document.getElementById("rightSide");
-        var theBody = document.getElementsByTagName("body")[0];
-
         function generateFaces() {
+            var numberOfFaces = 5;
+            var theLeftSide = document.getElementById("leftSide");
+
             for (var index=0; index < numberOfFaces; index++) {
                 var this_img = document.createElement("img");
                 this_img.src = "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
@@ -42,30 +40,7 @@
 
                 theLeftSide.appendChild(this_img);
             }
-
-            var leftSideImages = theLeftSide.cloneNode(true);
-            leftSideImages.removeChild(leftSideImages.lastChild);
-            theRightSide.appendChild(leftSideImages);
-
-            theLeftSide.lastChild.onclick = function nextLevel(event){
-                event.stopPropagation();
-                numberOfFaces += 5;
-                while (theLeftSide.firstChild)
-                    theLeftSide.removeChild(theLeftSide.firstChild);
-                while (theRightSide.firstChild)
-                    theRightSide.removeChild(theRightSide.firstChild);
-                generateFaces();
-            }
-
-            theBody.onclick = function gameOver(){
-                alert("Game Over!");
-
-                theBody.onclick = null;
-                theLeftSide.lastChild.onclick = null;
-            }
         }
-
-            
     </script>
 </body>
 </html>
